@@ -17,11 +17,13 @@ Python ver. 3.6+
 *你的Snark工人必须在运行状态中，不然脚本会直接用区块生产者的地址来作为Snark工人。*  
 *配置文件里面有其他选项可以重新配置。*  
 **如果你使用docker,你需要添加一个flag `-p 127.0.0.1:3085:3085`。**
+
 *Your snark worker must be RUNNED. Otherwise, the script will take the Block producer public key*  
 *Check the configuration file. There are some options you might want to reassign*  
 **If you run mina daemon through docker, then you need to add the flag `-p 127.0.0.1:3085:3085`**
 
-### Tmux  
+### Tmux 
+
 使用以下命令安装
 
 Install 
@@ -34,6 +36,8 @@ sudo apt-get update \
 && source ./venv/bin/activate \
 && pip3 install -r requirements.txt
 ```  
+使用以下
+Run  
 Run  
 ```
 tmux new -s snark-stopper -d venv/bin/python3 snark-stopper.py
