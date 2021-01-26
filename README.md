@@ -1,19 +1,29 @@
-# mina-snark-stopper
+# Mina-SNARK暂停器 (mina-snark-stopper)
+Mina协议的工具
+
 Tool for Mina Protocol
 
-## Description
+## 描叙 (Description)
+这个工具对于在同一个节点上同时运行区块生产者(block producer)和Snark工人(snark worker)的Mina验证者(validators)有一定的帮助。
+Snark工人通常会占据了大部分的处理器时间，这对区块生产有负面影响。使用此工具，可以设置`STOP_WORKER_BEFORE_MIN`， 从而设定在区块产生的多少分钟前，脚本会暂停Snark工人一段时间，直到区块成功产生。而这个时间可以通过`STOP_WORKER_FOR_MIN`设置。
+
 This tool can be useful for Mina validators who run node at same time as block producer and snark worker. 
 Worker can take up all processor time, which negatively affects block producer. When less than `STOP_WORKER_BEFORE_MIN` minutes remain before the next proposal, the script disconnects the worker and starts it after `STOP_WORKER_FOR_MIN` minutes.  
 
-## Requirements
+## 要求 (Requirements)
 Python ver. 3.6+
 
-## Install
+## 安装 (Install)
+*你的Snark工人必须在运行状态中，不然脚本会直接用区块生产者的地址来作为Snark工人。*  
+*配置文件里面有其他选项可以重新配置。*  
+**如果你使用docker,你需要添加一个flag `-p 127.0.0.1:3085:3085`。**
 *Your snark worker must be RUNNED. Otherwise, the script will take the Block producer public key*  
 *Check the configuration file. There are some options you might want to reassign*  
 **If you run mina daemon through docker, then you need to add the flag `-p 127.0.0.1:3085:3085`**
 
 ### Tmux  
+使用以下命令安装
+
 Install 
 ```
 sudo apt-get update \
