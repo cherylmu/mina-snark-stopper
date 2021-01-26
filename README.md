@@ -71,11 +71,14 @@ c29r3/snark-stopper
 3. 查看运行日志。 Check logs  
 `docker logs -f snark-stopper`  
 如果你需要改变参数，可以在配合文件中更改，然后重新启动docker container。
+
 If you want to change some parameteres - change it in config file and then restart docker container  
 `docker restart snark-stopper` 
 
 ## 排除故障 (Troubleshooting)  
+
 如果snark-stopper无法连接到端口 `3085`
+
 If the snark-stopper can't connect to port `3085`:  
 
 1. 检查端口是否可用。 Check port availability  
@@ -96,6 +99,7 @@ If the connection hangs, then the following options are possible:
 it's because of the blocking of private subnets that the docker uses  
 
 #### 更新docker镜像 (Update docker image)
+
 使用以下命令，并重新从第一步开始执行
 
 After running the command below, go to step 2
