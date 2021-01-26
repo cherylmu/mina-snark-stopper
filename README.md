@@ -36,24 +36,29 @@ sudo apt-get update \
 && source ./venv/bin/activate \
 && pip3 install -r requirements.txt
 ```  
-使用以下
-Run  
+使用以下运行Snark工人暂停器
+ 
 Run  
 ```
 tmux new -s snark-stopper -d venv/bin/python3 snark-stopper.py
 ```
+可以通过以下命令查看暂停器的工作状态
 
 You can watch the snark-stopper work  
 `tmux attach -t snark-stopper`  
 
+按下`ctrl + b`然后按`d`可以退出
+
 Press to exit `ctrl + b` and then `d`
 
 ### Docker  
+1. 下载配置文件并设置你需要的参数
 1. Download config file and change the parameters to suit you
 ```
 curl -s https://raw.githubusercontent.com/c29r3/mina-snark-stopper/master/config.yml > config.yml
 ```
 
+2. 运行docker container
 2. Run docker container  
 ```
 docker run -d \
@@ -63,29 +68,37 @@ docker run -d \
 --name snark-stopper \
 c29r3/snark-stopper
 ```
-
+3. 查看运行日志
 3. Check logs  
 `docker logs -f snark-stopper`  
+如果你需要改变参数，可以在配合文件中更改，然后重新启动docker container。
 If you want to change some parameteres - change it in config file and then restart docker container  
 `docker restart snark-stopper` 
 
-## Troubleshooting  
+## 排除故障 (Troubleshooting)  
+如果snark-stopper无法连接到端口 `3085`
 If the snark-stopper can't connect to port `3085`:  
+1. 检查端口是否可用
 1. Check port availability  
 `nc -t -vv localhost 3085`  
+控制台的输出应该是类似下面的：
 Output should be something like this:  
 `Connection to localhost 3085 port [tcp/*] succeeded!`
 
+如果连接卡住了，有以下几种可能性：
 If the connection hangs, then the following options are possible:  
-- Access to port `3085` is blocked via ufw\iptables  
-- You did not add a docker container flag `-p 127.0.0.1:3085:3085`  
-- Node is not synced yet. For this reason the stopper can't connect  
+- 端口`3085`被ufw]iptables禁止了。 Access to port `3085` is blocked via ufw\iptables  
+- docker container flag `-p 127.0.0.1:3085:3085`没有被添加。 You did not add a docker container flag `-p 127.0.0.1:3085:3085`  
+- 节点没有完成同步。 Node is not synced yet. For this reason the stopper can't connect  
 
+2. 端口有效，但是暂停器无法正常连接
 2. Port responds, but the stopper still can't connect  
-`iptables -D OUTPUT -d 172.16.0.0/12 -j DROP`  
+`iptables -D OUTPUT -d 172.16.0.0/12 -j DROP` 
+有可能是docker使用了私有的局域网，限制了网络。
 it's because of the blocking of private subnets that the docker uses  
 
-#### Update docker image  
+#### 更新docker镜像 (Update docker image)
+使用以下命令，并重新从第一步开始执行
 After running the command below, go to step 2
 ```
 docker rm -f snark-stopper; \
@@ -93,7 +106,7 @@ curl -s https://raw.githubusercontent.com/c29r3/mina-snark-stopper/master/config
 docker pull c29r3/snark-stopper
 ```
 
-## Uninstall  
+## 卸载 (Uninstall)  
 ```
 rm -rf mina-snark-stopper; \
 docker rm -f snark-stopper; \
