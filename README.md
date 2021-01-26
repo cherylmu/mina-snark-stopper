@@ -69,7 +69,8 @@ c29r3/snark-stopper
 ```
 
 3. 查看运行日志。 Check logs  
-`docker logs -f snark-stopper`  
+`docker logs -f snark-stopper`
+
 如果你需要改变参数，可以在配合文件中更改，然后重新启动docker container。
 
 If you want to change some parameteres - change it in config file and then restart docker container  
@@ -82,7 +83,8 @@ If you want to change some parameteres - change it in config file and then resta
 If the snark-stopper can't connect to port `3085`:  
 
 1. 检查端口是否可用。 Check port availability  
-`nc -t -vv localhost 3085`  
+`nc -t -vv localhost 3085` 
+
 控制台的输出应该是类似下面的：
 Output should be something like this:  
 `Connection to localhost 3085 port [tcp/*] succeeded!`
@@ -94,7 +96,8 @@ If the connection hangs, then the following options are possible:
 - 节点没有完成同步。 Node is not synced yet. For this reason the stopper can't connect  
 
 2. 端口有效，但是暂停器无法正常连接。 Port responds, but the stopper still can't connect  
-`iptables -D OUTPUT -d 172.16.0.0/12 -j DROP` 
+`iptables -D OUTPUT -d 172.16.0.0/12 -j DROP`
+
 有可能是docker使用了私有的局域网，限制了网络。
 it's because of the blocking of private subnets that the docker uses  
 
