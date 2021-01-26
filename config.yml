@@ -1,20 +1,26 @@
 WORKER_PUB_KEY: YOUR_PUBLIC_KEY
 # specified in MINA
 # 1 MINA = 1,000,000,000 nanomina
-# examples 0.25 MINA = 250000000 nanomina
+# 例子： 0.25 MINA = 250000000 nanomina
+# 设置Snark工作的费用
 WORKER_FEE: 0.25
 
 # how often to check `next proposal time` (seconds)
+# 设置程序查询下一次区块生产的时间间隔(秒数)
 CHECK_PERIOD_SEC: 120
 
 # the period after which the worker will be started again (minutes)
+# 设置暂停器暂停的时间(分钟)
 STOP_WORKER_FOR_MIN: 15
 
 # how many minutes before 'next proposal' the worker will be turned off
+# 设置区块生产多少分钟前暂停Snark工人(分钟)
 STOP_WORKER_BEFORE_MIN: 10
 
 # ip address of graphql api (by default 127.0.0.1)
+# graphql api的IP地址
 GRAPHQL_HOST: 127.0.0.1
 
 # graphql port (by default 3085)
+# graphql端口
 GRAPHQL_PORT: 3085
