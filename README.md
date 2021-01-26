@@ -91,7 +91,7 @@ Output should be something like this:
 
 如果连接卡住了，有以下几种可能性：
 If the connection hangs, then the following options are possible:  
-- 端口`3085`被ufw]iptables禁止了。 Access to port `3085` is blocked via ufw\iptables  
+- 端口`3085`被ufw\iptables禁止了。 Access to port `3085` is blocked via ufw\iptables  
 - docker container flag `-p 127.0.0.1:3085:3085`没有被添加。 You did not add a docker container flag `-p 127.0.0.1:3085:3085`  
 - 节点没有完成同步。 Node is not synced yet. For this reason the stopper can't connect  
 
